@@ -1,0 +1,693 @@
+:root {
+  --primary: #678e49;
+  --secondary: #f8fae4;
+  --thirdly: #526838;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 防止 padding 把盒子撑大 */
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;    /* 禁止横向滚动条，防止页面左右晃动出现白边 */
+  background: #f7f8dd;   /* 确保整个背景底色一致 */
+}
+
+/* 🔧 消除所有默认间距和白边的核心代码 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 防止 padding 把盒子撑大 */
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;    /* 禁止横向滚动条，防止页面左右晃动出现白边 */
+  background: #f7f8dd;   /* 确保整个背景底色一致 */
+}
+/* --- 基础重置 --- */
+.topbar {
+  background: #f7f8dd;
+  width: 100%;
+}
+
+.rule {
+  background: #5c7a3a;
+  margin: 11px auto;
+  width: 90%; /* 手机端线长一点 */
+}
+.rule--thin { height: 1px; }
+.rule--thick { height: 3px; }
+
+/* --- 核心布局 --- */
+.header-inner {
+  display: flex;
+  justify-content: space-between; /* 关键：Logo左，汉堡右 */
+  align-items: center;
+  padding: 2% 5%;
+  position: relative;
+}
+
+.logo-wrap img {
+  height: 45px;
+  display: block;
+}
+
+/* --- 隐藏 Checkbox --- */
+.nav-toggle {
+  display: none;
+}
+
+/* --- 汉堡菜单图标 --- */
+.hamburger-label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.hamburger-label span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: #5c7a3a;
+  border-radius: 2px;
+}
+
+/*Offcanvas*/
+.nav-menu {
+  position: fixed;
+  top: 0;
+  right: -100%; 
+  width: 280px;
+  height: 100vh;
+  background: #f7f8dd;
+  z-index: 1001;
+  transition: 0.4s right ease;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+}
+
+.nav-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  color: #5c7a3a;
+  border-bottom: 1px solid #5c7a3a;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* 修改原本的 a 标签样式 */
+.nav-menu a {
+  text-decoration: none;
+  color: #5c7a3a;
+  padding: 15px 0;
+  font-size: 18px;
+  border-bottom: 1px rgba(92, 122, 58, 0.1) solid;
+  
+  /* 新增：为了防止抖动的布局技巧 */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  transition: color 0.3s;
+}
+
+/* 利用伪元素预占位粗体的宽度 */
+.nav-menu a::after {
+  display: block;
+  content: attr(title); /* 需要在 HTML 中配合 title 属性 */
+  font-weight: bold;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+/* 悬停效果 */
+.nav-menu a:hover {
+  font-weight: bold;
+  color: #526838;
+}
+
+/* --- 动画：选中时滑出 --- */
+.nav-toggle:checked ~ .nav-menu {
+  right: 0;
+}
+
+/* --- 遮罩层 --- */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  display: none;
+  z-index: 1000;
+}
+
+.nav-toggle:checked ~ .nav-overlay {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .hamburger-label { display: none; } 
+  .nav-menu {
+    position: static;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  
+  .nav-menu-header { display: none; }
+  
+  .nav-menu a {
+    margin-left: 20px;
+    border: none;
+  }
+
+  .rule { width: calc(100% - 120px); }
+}
+
+/*SECTION 1*/
+.ourstoryp1 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  font-family: Libre Baskerville;
+}
+
+.ourstoryp1 img {
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+  display: block;
+}
+
+.ourstoryp1-text {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  padding: 70px 20px 70px 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: right;
+  text-align: right;
+}
+
+.ourstoryp1-text h3 {
+  font-size: 24px;
+  margin-bottom: 0;
+  color: #a38834;
+}
+
+.ourstoryp1-text p {
+  line-height: 1。0; /*让字距离变小*/
+  font-size: 24px;
+  margin-bottom: -8px;
+  padding: 0;
+  color: #ffffff;
+}
+
+@media (min-width: 768px){
+  .ourstoryp1-text h3 {
+  font-size: 70px;
+  margin-bottom: 0;
+  color: #a38834;
+}
+
+.ourstoryp1-text p {
+  line-height: 1。0; /*让字距离变小*/
+  font-size: 35px;
+  margin-bottom: -8px;
+  padding: 0;
+  color: #ffffff;
+}
+}
+
+/*SECTION 2*/
+.section2 {
+  color: #f2d27b;
+  background: #5c6f3a;
+  font-family: "Effra", Helvetica, sans-serif;
+  padding: 10% 3%;
+}
+/* -------------------------------------
+ * 标题背景控制
+ * ------------------------------------- */
+
+/* 针对标题文本及其背景的容器 */
+.example-title {
+  /* 保持左对齐，但允许子元素根据自身内容宽度进行布局 */
+  text-align: left;
+  /* 确保容器有足够的内边距，以便背景线可以从左边开始 */
+  padding-left: 15px; /* 调整为你容器的左右内边距 */
+}
+
+/* 针对标题 h2 本身 */
+.example-title h2 {
+  display: inline-block;
+  background-color: #fbdd7a;
+
+  padding: 10px 15px;
+  margin-bottom: 30px;
+  color: #000000;
+  text-align: left;
+}
+
+h3 {
+  font-family: Libre Baskerville;
+  color: #000000;
+  margin-top: 0;
+}
+
+a {
+  color: #fbdd7a;
+}
+a:hover {
+  color: #fbdd7a;
+  text-decoration: none;
+}
+
+.container-fluid .row {
+  padding: 0 0 4em 0;
+}
+.container-fluid .row:nth-child(even) {
+  background: #fbdd7a;
+}
+
+/*==================================
+    TIMELINE
+==================================*/
+/*-- GENERAL STYLES
+    ------------------------------*/
+.timeline {
+  line-height: 1.4em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.timeline h3 {
+  line-height: inherit;
+}
+
+/*----- TIMELINE ITEM -----*/
+.timeline-item {
+  padding-left: 40px;
+  position: relative;
+}
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/*----- TIMELINE INFO -----*/
+.timeline-info {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin: 0 0 0.5em 0;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/*----- TIMELINE MARKER -----*/
+.timeline-marker {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 15px;
+}
+.timeline-marker:before {
+  background: #fbdd7a;
+  border: 3px solid transparent;
+  border-radius: 100%;
+  content: "";
+  display: block;
+  height: 15px;
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 15px;
+  transition:
+    background 0.3s ease-in-out,
+    border 0.3s ease-in-out;
+}
+.timeline-marker:after {
+  content: "";
+  width: 3px;
+  background: #fbdd7a;
+  display: block;
+  position: absolute;
+  top: 24px;
+  bottom: 0;
+  left: 6px;
+}
+.timeline-item:last-child .timeline-marker:after {
+  content: none;
+}
+
+.timeline-item:not(.period):hover .timeline-marker:before {
+  background: transparent;
+  border: 3px solid #fbdd7a;
+}
+
+/*----- TIMELINE CONTENT -----*/
+.timeline1-content {
+  padding-bottom: 40px;
+}
+
+
+/*----------------------------------------------
+        MOD: TIMELINE SPLIT
+    ----------------------------------------------*/
+@media (min-width: 768px) {
+  .timeline-split .timeline,
+  .timeline-centered .timeline {
+    display: table;
+  }
+  .timeline-split .timeline-item,
+  .timeline-centered .timeline-item {
+    display: table-row;
+    padding: 0;
+  }
+  .timeline-split .timeline-info,
+  .timeline-centered .timeline-info,
+  .timeline-split .timeline-marker,
+  .timeline-centered .timeline-marker,
+  .timeline-split .timeline-content,
+  .timeline-centered .timeline-content,
+  .timeline-split .period .timeline-info {
+    display: table-cell;
+    vertical-align: top;
+  }
+  .timeline-split .timeline-marker,
+  .timeline-centered .timeline-marker {
+    position: relative;
+  }
+  .timeline-split .timeline-content,
+  .timeline-centered .timeline-content {
+    padding-left: 30px;
+  }
+  .timeline-split .timeline-info,
+  .timeline-centered .timeline-info {
+    padding-right: 30px;
+  }
+  .timeline-split .period .timeline-title,
+  .timeline-centered .period .timeline-title {
+    position: relative;
+    left: -45px;
+  }
+}
+
+/* --- part2 --- */
+/* --- TTable 容器 --- */
+.ttable {
+  background: #5c6f3a; 
+  padding: 60px 0 80px;
+  font-family: 'Libre Baskerville', serif; /* 保持字体一致 */
+}
+
+.ttable-inner {
+  width: min(1050px, 95vw);
+  margin: 0 auto;
+  position: relative;
+}
+
+/* 黄色标题标签 */
+.ttable-title {
+  display: inline-block;
+  background: #f2d27b;
+  color: #5c6f3a; /* 改为深绿字更清晰 */
+  padding: 6px 18px;
+  font-weight: 700;
+  font-size: 16px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 50px;
+  text-transform: uppercase;
+}
+
+/* 垂直中线 */
+.ttable-inner::before {
+  content: "";
+  position: absolute;
+  top: 100px;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: #f2d27b;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* 每一行布局 */
+.tb-row {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr; /* 左右平分，中间预留连接空间 */
+  align-items: center;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+/* 图片样式 */
+.tb-img {
+  width: 320px;
+  height: auto;
+  display: block;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* 让左边的图片靠右，右边的图片靠左 */
+.tb-left .tb-img { margin-left: auto; }
+.tb-right .tb-img { margin-right: auto; }
+
+/* 文字块通用样式 */
+.tb-text {
+  max-width: 320px;
+  color: #ffffff; /* 改为白色文字以适应深绿背景 */
+}
+
+.tb-year {
+  color: #f2d27b;
+  font-weight: 700;
+  font-size: 24px; /* 加大年份字号 */
+  margin-bottom: 8px;
+}
+
+.tb-desc {
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* --- 连接小横线逻辑 --- */
+
+/* 右侧文字：线在左边 */
+.tb-text.right {
+  position: relative;
+  padding-left: 50px;
+  text-align: left;
+}
+
+.tb-text.right::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15px; /* 对齐年份中心 */
+  width: 40px;
+  height: 2px;
+  background: #f2d27b;
+}
+
+/* 左侧文字：线在右边 */
+.tb-text.left {
+  position: relative;
+  padding-right: 50px;
+  text-align: right;
+  margin-left: auto; /* 靠右对齐中线 */
+}
+
+.tb-text.left::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 15px;
+  width: 40px;
+  height: 2px;
+  background: #f2d27b;
+}
+
+/* 隐藏不再需要的中间占位符高度，由 row 控制间距 */
+.tb-mid {
+  height: 1px;
+}
+
+/* ==========================================
+   响应式显示控制 (Responsive Visibility)
+   ========================================== */
+
+/* --- 默认状态 (手机端 Phone Size) --- */
+/* 在小屏幕下，显示 section2，隐藏 ttable (part2) */
+.section2 {
+    display: block; 
+}
+
+.ttable {
+    display: none;
+}
+
+/* --- 针对 iPad 和 Desktop (屏幕宽度大于等于 768px) --- */
+@media (min-width: 768px) {
+    /* 在大屏幕下，隐藏 section2，显示 ttable (part2) */
+    .section2 {
+        display: none !important;
+    }
+    
+    .ttable {
+        display: block !important;
+    }
+}
+
+/*section3*/
+/* =========================
+   EXTRA IMAGE SECTION
+   ========================= */
+/* =========================
+   OUR TEAM (match screenshot)
+   ========================= */
+/* ===== Our Team Section ===== */
+/* =========================
+   OUR TEAM (FINAL)
+   ========================= */
+
+.team-section{
+  background: #f7f8dd;      /* 跟你网站淡黄一致 */
+  padding: 10% 3%;          /* 上下空白（像图那样） */
+}
+
+.team-wrap{
+  width: min(1100px, 88vw); /* 整体内容宽度 */
+  margin: 0 auto;
+  display: flex;
+  align-items: center;      /* 垂直居中对齐 */
+  justify-content: space-between;
+  gap: 80px;                /* 左右间距 */
+}
+
+.team-right{
+  flex: 1;
+  max-width: 420px;         /* 左边文字不要太宽（像图） */
+}
+
+.team-right h2{
+  margin: 0 0 20px;
+  font-size: 34px;
+  font-weight: 700;
+  color: #111;
+}
+
+.team-right p{
+  margin: 0 0 18px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #222;
+}
+
+.team-btn{
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #f6c84c;
+  color: #111;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 6px;
+}
+
+.team-left{
+  flex: 1;
+  display: flex;
+  justify-content: flex-end; /* 图片靠右 */
+}
+
+.team-left img{
+  width: 430px;             /* ✅ 关键：像图那样大小 */
+  height: auto;
+  display: block;
+}
+
+/* 小屏手机：自动变上下排 */
+@media (max-width: 900px){
+  .team-wrap{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+  .team-left{
+    justify-content: flex-start;
+  }
+  .team-left img{
+    width: min(520px, 100%);
+  }
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+/* --- Footer 基础样式 (Desktop 默认) --- */
+.footer2 {
+  background: #f7f8dd;
+  padding: 2% 0; /* 增加上下留白，让页面更有呼吸感 */
+}
+
+.footer2-text {
+  width: calc(100% - 120px); 
+  margin: 0 auto;
+  padding: 1% 0;
+  text-align: left; /* Desktop 默认靠左堆叠 (图1) */
+  color: #5c7a3a;
+  font-family: Georgia, serif;
+}
+
+.footer2-brand {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.footer2-copy {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+/* --- Phone Size 样式 (手机端) --- */
+@media (max-width: 768px) {
+  .footer2-text {
+    display: flex;             /* 开启弹性布局 */
+    justify-content: space-between; /* 左右分居 (图2效果) */
+    align-items: center;       /* 垂直居中 */
+    text-align: unset;         /* 取消之前的靠左对齐 */
+    width: 90%;                /* 手机端让宽度稍微宽一点，更好看 */
+  }
+
+  .footer2-copy {
+    margin-top: 0;             /* 取消手机端的顶部间距，保持水平对齐 */
+  }
+}

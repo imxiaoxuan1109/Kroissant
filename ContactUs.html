@@ -1,0 +1,179 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Title</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+            crossorigin="anonymous" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.core.min.css"
+            integrity="sha512-YQlbvfX5C6Ym6fTUSZ9GZpyB3F92hmQAZTO5YjciedwAaGRI9ccNs4iw2QTCJiSPheUQZomZKHQtuwbHkA9lgw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/css/glide.theme.min.css"
+            integrity="sha512-wCwx+DYp8LDIaTem/rpXubV/C1WiNRsEVqoztV0NZm8tiTvsUeSlA/Uz02VTGSiqfzAHD4RnqVoevMcRZgYEcQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer" />
+        <link href="ContactUs.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- HEADER -->
+        <header class="topbar">
+            <div class="rules-group">
+                <div class="rule rule--thin"></div>
+                <div class="rule rule--thick"></div>
+            </div>
+
+            <div class="header-inner">
+                <div class="logo-wrap">
+                    <img src="images/KrossiantLogo.png" alt="Krossiant Logo" />
+                </div>
+
+                <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+
+                <label for="nav-toggle" class="hamburger-label">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+
+                <nav class="nav-menu">
+                    <div class="nav-menu-header">
+                        <span>Menu</span>
+                        <label for="nav-toggle" class="close-icon">&times;</label>
+                    </div>
+                    <a href="index.html" title="About Us">About Us</a>
+                    <a href="OurStory.html" title="Our Story">Our Story</a>
+                    <a href="menu.html" title="Menu">Menu</a>
+                    <a href="Event.html" title="Specials">Specials</a>
+                    <a href="ContactUs.html" title="Contact Us">Contact Us</a>
+                </nav>
+
+                <label for="nav-toggle" class="nav-overlay"></label>
+            </div>
+
+            <div class="rules-group">
+                <div class="rule rule--thick"></div>
+                <div class="rule rule--thin"></div>
+            </div>
+        </header>
+
+        <div class="section2">
+            <div class="first">
+                <img src="images/cu1.png" class="img-fluid" alt="" />
+                <div class="firsttext">
+                    <h1>Get In Touch</h1>
+                    <p>Have questions? We may have your answer in our FAQ section -- Take a quick look here!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section3">
+            <div class="container">
+                <h2 class="main-title text-center mb-5">
+                    CONTACT US VIA THE FORM BELOW & WE'LL GET BACK TO YOUR AS SOON AS WE CAN.
+                </h2>
+
+                <div class="row">
+                    <div class="col-lg-6 contact-info-wrapper">
+                        <div class="row">
+                            <div class="col-6 col-lg-12 mb-4">
+                                <h5 class="fw-bold">Email</h5>
+                                <p>hello@kopissant.com</p>
+                            </div>
+                            <div class="col-6 col-lg-12 mb-4">
+                                <h5 class="fw-bold">Opening Hours</h5>
+                                <p>Monday – Friday<br />8:00 AM – 9:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 col-lg-12 mb-4">
+                                <h5 class="fw-bold">Address</h5>
+                                <p>123, Jalan Kopi Manis, 50450 Kuala Lumpur</p>
+                            </div>
+                            <div class="col-6 col-lg-12 mb-4">
+                                <h5 class="fw-bold">Phone / WhatsApp</h5>
+                                <p>+60 18-234 5678</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mt-4 mt-lg-0 ps-lg-5">
+                        <form class="contact-form">
+                            <input type="text" class="form-control mb-3 custom-input" placeholder="NAME" />
+                            <input type="text" class="form-control mb-3 custom-input" placeholder="PHONE" />
+                            <input type="email" class="form-control mb-3 custom-input" placeholder="EMAIL" />
+                            <textarea class="form-control mb-4 custom-input" rows="4" placeholder="MESSAGE"></textarea>
+                            <button
+                                type="button"
+                                class="btn submit-btn"
+                                data-bs-toggle="modal"
+                                data-bs-target="#thankYouModal">
+                                SUBMIT
+                            </button>
+                        </form>
+
+                        <div class="modal fade" id="thankYouModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div
+                                    class="modal-content text-center"
+                                    style="background-color: #f1f3de; border: 2px solid #8da46e; border-radius: 15px">
+                                    <div class="modal-body py-5">
+                                        <h4 style="color: #3e4a36; font-family: serif" class="mb-4">
+                                            Thank You! Your message has been sent successfully.
+                                        </h4>
+                                        <button type="button" class="btn submit-btn" data-bs-dismiss="modal">
+                                            CLOSE
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section4">
+            <div class="contact-map">
+                <iframe
+                    title="Google Maps showing our shop location"
+                    src="https://www.google.com/maps/embed?pb=..."
+                    width="100%"
+                    height="100%"
+                    style="border: 0"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+
+        <!--footer-->
+        <footer class="footer2">
+            <div class="footerframe">
+                <div class="rule rule--thin"></div>
+                <div class="rule rule--thick"></div>
+
+                <div class="footer2-text">
+                    <div class="footer2-brand">KROISSANT</div>
+                    <div class="footer2-copy">©2025 Made In Malaysia</div>
+                </div>
+
+                <div class="rule rule--thick"></div>
+                <div class="rule rule--thin"></div>
+            </div>
+        </footer>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
+    </body>
+</html>

@@ -1,0 +1,625 @@
+:root {
+    --primary: #678e49;
+    --secondary: #f8fae4;
+    --thirdly: #526838;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* 防止 padding 把盒子撑大 */
+}
+
+html,
+body {
+    width: 100%;
+    overflow-x: hidden; /* 禁止横向滚动条，防止页面左右晃动出现白边 */
+    background: #f7f8dd; /* 确保整个背景底色一致 */
+}
+
+/* 🔧 消除所有默认间距和白边的核心代码 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* 防止 padding 把盒子撑大 */
+}
+
+html,
+body {
+    width: 100%;
+    overflow-x: hidden; /* 禁止横向滚动条，防止页面左右晃动出现白边 */
+    background: #f7f8dd; /* 确保整个背景底色一致 */
+}
+/* --- 基础重置 --- */
+.topbar {
+    background: #f7f8dd;
+    width: 100%;
+}
+
+.rule {
+    background: #5c7a3a;
+    margin: 11px auto;
+    width: 90%; /* 手机端线长一点 */
+}
+.rule--thin {
+    height: 1px;
+}
+.rule--thick {
+    height: 3px;
+}
+
+/* --- 核心布局 --- */
+.header-inner {
+    display: flex;
+    justify-content: space-between; /* 关键：Logo左，汉堡右 */
+    align-items: center;
+    padding: 0% 5%;
+    position: relative;
+}
+
+.logo-wrap img {
+    height: 45px;
+    display: block;
+}
+
+/* --- 隐藏 Checkbox --- */
+.nav-toggle {
+    display: none;
+}
+
+/* --- 汉堡菜单图标 --- */
+.hamburger-label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.hamburger-label span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: #5c7a3a;
+    border-radius: 2px;
+}
+
+/*Offcanvas*/
+.nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: #f7f8dd;
+    z-index: 1001;
+    transition: 0.4s right ease;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.nav-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    color: #5c7a3a;
+    border-bottom: 1px solid #5c7a3a;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* 修改原本的 a 标签样式 */
+.nav-menu a {
+  text-decoration: none;
+  color: #5c7a3a;
+  padding: 15px 0;
+  font-size: 18px;
+  border-bottom: 1px rgba(92, 122, 58, 0.1) solid;
+  
+  /* 新增：为了防止抖动的布局技巧 */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  transition: color 0.3s;
+}
+
+/* 利用伪元素预占位粗体的宽度 */
+.nav-menu a::after {
+  display: block;
+  content: attr(title); /* 需要在 HTML 中配合 title 属性 */
+  font-weight: bold;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+/* 悬停效果 */
+.nav-menu a:hover {
+  font-weight: bold;
+  color: #526838;
+}
+
+/* --- 动画：选中时滑出 --- */
+.nav-toggle:checked ~ .nav-menu {
+    right: 0;
+}
+
+/* --- 遮罩层 --- */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: none;
+    z-index: 1000;
+}
+
+.nav-toggle:checked ~ .nav-overlay {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .hamburger-label {
+        display: none;
+    }
+    .nav-menu {
+        position: static;
+        flex-direction: row;
+        width: auto;
+        height: auto;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .nav-menu-header {
+        display: none;
+    }
+
+    .nav-menu a {
+        margin-left: 20px;
+        border: none;
+    }
+
+    .rule {
+        width: calc(100% - 120px);
+    }
+}
+
+/*SECTION 1*/
+.section1 {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.section1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/*section 2*/
+/* Section 2 基础布局 */
+.section2 {
+    background-color: #f8fae4;
+    padding: 40px 0 0 0;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    min-height: 600px; /* 保证高度足够 */
+}
+
+/* 轮播容器 */
+#kopiCarousel {
+    position: relative;
+    z-index: 10;
+    max-width: 600px;
+    margin: 40px auto 0;
+}
+
+/* 图片圆形边框容器 */
+.kopi-img-container {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    position: relative;
+    z-index: 11;
+}
+
+.kopi-img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+}
+
+/* 文字样式与位置 */
+.kopi-name-wrapper {
+    position: relative;
+    z-index: 12;
+    margin-top: 50px; /* 让文字下沉到绿色区域 */
+}
+
+.kopi-name {
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: none;
+    font-family: serif; /* 匹配图中衬线字体 */
+}
+
+/* 左右切换按钮 - 绿色小方块 */
+.carousel-control-prev,
+.carousel-control-next {
+    width: auto;
+    opacity: 1;
+    top: 50%;
+    transform: translateY(-80%); /* 向上调整对齐圆圈中心 */
+}
+
+.carousel-control-prev { left: 10%; }
+.carousel-control-next { right: 10%; }
+
+.custom-nav-btn {
+    background-color: #6b8e4e; /* 按钮背景色 */
+    width: 45px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.5rem;
+}
+
+/* 底部绿色背景 */
+.kopi-bottom-bg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #354e1d; /* 深绿色 */
+    width: 100%;
+    height: 220px;
+    z-index: 5;
+    /* 创建平滑圆弧 */
+    border-top-left-radius: 50% 100px;
+    border-top-right-radius: 50% 100px;
+}
+
+/* --- 手机端适配 (Phone Size) --- */
+@media (max-width: 768px) {
+    .section2 {
+        min-height: 500px;
+    }
+
+    .kopi-img-container {
+        width: 200px;
+        height: 200px;
+        border-width: 5px;
+    }
+
+    .kopi-name {
+        font-size: 1.8rem;
+    }
+
+    .kopi-bottom-bg {
+        height: 150px;
+        border-top-left-radius: 50% 60px;
+        border-top-right-radius: 50% 60px;
+    }
+
+    .custom-nav-btn {
+        width: 35px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+
+    /* 手机端按钮稍微向中心靠拢以免贴边 */
+    .carousel-control-prev { left: 5%; }
+    .carousel-control-next { right: 5%; }
+}
+
+/*section 3*/
+.ticker-wrap {
+    background: #ffeeb6; /* ✅ 你要的背景色 */
+    border-top: 3px solid #6b8f4e;
+    overflow: hidden;
+    padding: 10px 0;
+}
+
+.ticker {
+    width: 100%;
+    overflow: hidden;
+}
+
+.ticker-track {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    gap: 30px;
+    padding-left: 100%;
+    animation: scroll 20s linear infinite;
+}
+
+.ticker-track span {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    color: #111;
+    letter-spacing: 0.5px;
+}
+
+.ticker-track .star {
+    font-size: 16px;
+}
+
+/* ✅ 无限滚动动画 */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* ✅ hover 暂停（很加分） */
+.ticker-wrap:hover .ticker-track {
+    animation-play-state: paused;
+}
+
+/*section4*/
+.section4 {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.section4 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/*section5*/
+.section5 {
+    background: #f7f8dd;
+}
+.section5 img {
+    width: 100%;
+     /*height: 100%;
+    object-fit: cover;*/
+    display: block;
+}
+poker-hand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2vh 20vw;
+}
+poker-card {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: block;
+    padding: 0;
+    flex: 0 0 75%;
+    text-align: center;
+    font-family: courier;
+    margin: 0 -15%;
+    position: relative;
+    transition-duration: 0.4s;
+    background: rgba(0, 0, 0, 0);
+    -webkit-animation: pop 0.4s;
+    animation: pop 0.4s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    transform-origin: 50% 50%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+poker-card:nth-child(1) {
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+    transform: rotate(-12deg) translateY(2%);
+    z-index: 1;
+}
+poker-card:nth-child(2) {
+    -webkit-animation-delay: 0.4s;
+    animation-delay: 0.4s;
+    transform: rotate(0deg) scale(1.1);
+    z-index: 3;
+}
+poker-card:nth-child(3) {
+    -webkit-animation-delay: 0.6s;
+    animation-delay: 0.6s;
+    transform: rotate(-12deg) translateY(2%);
+    z-index: 1;
+}
+
+poker-card:after,
+poker-card:before {
+    position: absolute;
+    font-size: calc(2vh + 1vw);
+}
+poker-card:after {
+    top: 2px;
+    right: 5px;
+}
+poker-card:before {
+    bottom: 2px;
+    left: 5px;
+}
+body poker-card:hover {
+    transform: scale(1.25) translateY(-5%);
+    cursor: pointer;
+    box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.3);
+    transform-origin: inherit;
+    z-index: 10;
+}
+poker-card:nth-child(1) {
+    transform: rotate(-10deg);
+}
+poker-card:nth-child(2) {
+    transform: rotate(0deg);
+}
+poker-card:nth-child(3) {
+    transform: rotate(10deg);
+}
+@-webkit-keyframes pop {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes pop {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+/*section 6*/
+.s6b {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    font-family: Libre Baskerville;
+}
+
+.s6b img {
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+    display: block;
+}
+
+.content {
+    position: absolute;
+    inset: 0;
+    padding: 8%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.content2 {
+    position: absolute;
+    inset: 0;
+    padding: 14% 20% 22% 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    text-align: center;
+}
+
+.content2 h3 {
+    font-size: 240%;
+    margin-bottom: 0;
+    text-align: left;
+    color: #000000;
+}
+.content2 p {
+    font-size: 150%;
+    margin-bottom: 0;
+    text-align: left;
+    color: #000000;
+}
+.read-more-btn {
+  background-color: #f5d76e; /* 按钮的黄色 */
+  color: #242424; /* 按钮文字颜色 */
+  border: none;
+  padding: 4% 2%;
+  border-radius: 25px;
+  font-size: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.read-more-btn:hover {
+  background-color: #eacb5c; /* 鼠标悬停时的颜色 */
+}
+@media (max-width: 768px) {
+.content2 h3 {
+    font-size: 128%;
+    margin-bottom: 0;
+    text-align: left;
+    color: #000000;
+}
+.content2 p {
+    font-size: 80%;
+    margin-bottom: 0;
+    text-align: left;
+    color: #000000;
+}
+    .read-more-btn {
+  background-color: #f5d76e; /* 按钮的黄色 */
+  color: #242424; /* 按钮文字颜色 */
+  border: none;
+  padding: 4% 2%;
+  border-radius: 25px;
+  font-size: 40%;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+}
+}
+
+/*footer*/
+.footer2 {
+    background: #f7f8dd;
+    padding: 2% 0; /* 增加上下留白，让页面更有呼吸感 */
+}
+.footer2-text {
+    width: calc(100% - 120px);
+    margin: 0 auto;
+    padding: 1% 0;
+    text-align: left; /* Desktop 默认靠左堆叠 (图1) */
+    color: #5c7a3a;
+    font-family: Georgia, serif;
+}
+
+.footer2-brand {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.footer2-copy {
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+/* --- Phone Size 样式 (手机端) --- */
+@media (max-width: 768px) {
+    .footer2-text {
+        display: flex; /* 开启弹性布局 */
+        justify-content: space-between; /* 左右分居 (图2效果) */
+        align-items: center; /* 垂直居中 */
+        text-align: unset; /* 取消之前的靠左对齐 */
+        width: 90%; /* 手机端让宽度稍微宽一点，更好看 */
+    }
+
+    .footer2-copy {
+        margin-top: 0; /* 取消手机端的顶部间距，保持水平对齐 */
+    }
+}

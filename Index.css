@@ -1,0 +1,587 @@
+:root {
+  --primary: #678e49;
+  --secondary: #f8fae4;
+  --thirdly: #526838;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 防止 padding 把盒子撑大 */
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;    /* 禁止横向滚动条，防止页面左右晃动出现白边 */
+  background: #f7f8dd;   /* 确保整个背景底色一致 */
+}
+
+/* 🔧 消除所有默认间距和白边的核心代码 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 防止 padding 把盒子撑大 */
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;    /* 禁止横向滚动条，防止页面左右晃动出现白边 */
+  background: #f7f8dd;   /* 确保整个背景底色一致 */
+}
+/* --- 基础重置 --- */
+.topbar {
+  background: #f7f8dd;
+  width: 100%;
+}
+
+.rule {
+  background: #5c7a3a;
+  margin: 11px auto;
+  width: 90%; /* 手机端线长一点 */
+}
+.rule--thin { height: 1px; }
+.rule--thick { height: 3px; }
+
+/* --- 核心布局 --- */
+.header-inner {
+  display: flex;
+  justify-content: space-between; /* 关键：Logo左，汉堡右 */
+  align-items: center;
+  padding: 2% 5%;
+  position: relative;
+}
+
+.logo-wrap img {
+  height: 45px;
+  display: block;
+}
+
+/* --- 隐藏 Checkbox --- */
+.nav-toggle {
+  display: none;
+}
+
+/* --- 汉堡菜单图标 --- */
+.hamburger-label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.hamburger-label span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: #5c7a3a;
+  border-radius: 2px;
+}
+
+/*Offcanvas*/
+.nav-menu {
+  position: fixed;
+  top: 0;
+  right: -100%; 
+  width: 280px;
+  height: 100vh;
+  background: #f7f8dd;
+  z-index: 1001;
+  transition: 0.4s right ease;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+}
+
+.nav-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  color: #5c7a3a;
+  border-bottom: 1px solid #5c7a3a;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* 修改原本的 a 标签样式 */
+.nav-menu a {
+  text-decoration: none;
+  color: #5c7a3a;
+  padding: 15px 0;
+  font-size: 18px;
+  border-bottom: 1px rgba(92, 122, 58, 0.1) solid;
+  
+  /* 新增：为了防止抖动的布局技巧 */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  transition: color 0.3s;
+}
+
+/* 利用伪元素预占位粗体的宽度 */
+.nav-menu a::after {
+  display: block;
+  content: attr(title); /* 需要在 HTML 中配合 title 属性 */
+  font-weight: bold;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+/* 悬停效果 */
+.nav-menu a:hover {
+  font-weight: bold;
+  color: #526838;
+}
+
+/* --- 动画：选中时滑出 --- */
+.nav-toggle:checked ~ .nav-menu {
+  right: 0;
+}
+
+/* --- 遮罩层 --- */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  display: none;
+  z-index: 1000;
+}
+
+.nav-toggle:checked ~ .nav-overlay {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .hamburger-label { display: none; } 
+  .nav-menu {
+    position: static;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  
+  .nav-menu-header { display: none; }
+  
+  .nav-menu a {
+    margin-left: 20px;
+    border: none;
+  }
+
+  .rule { width: calc(100% - 120px); }
+}
+/*section1 */
+.homep1 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  font-family: Libre Baskerville;
+}
+
+.homep1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.homep1-text {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  padding: 70px 100px 70px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  text-align: left;
+}
+
+.homep1-text h3 {
+  font-size: 24px;
+  margin-bottom: 0;
+  color: #a38834;
+}
+
+.homep1-text p {
+  font-size: 24px;
+  margin-bottom: -8px;
+  color: #ffffff;
+}
+@media (min-width:768px) {
+  .homep1-text h3 {
+  font-size: 90px;
+  margin-bottom: 0;
+  color: #a38834;
+}
+
+.homep1-text p {
+  font-size: 50px;
+  margin-bottom: -8px;
+  color: #ffffff;
+}
+}
+/*section2*/
+.section2 {
+  margin: 0;
+  padding: 0;
+}
+
+.homep2 {
+  width: 100%;
+}
+/*section3*/
+.section3 {
+  background-color: var(--secondary);
+  padding: 5% 0;
+}
+.section3 h3 {
+  font-size: 70px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: right;
+  font-family: Phetsarath;
+}
+
+.section3 h2 {
+  font-size: 90px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--thirdly);
+  margin-bottom: 20px;
+  font-family: Phetsarath;
+}
+.section3 h6 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: -10px;
+  padding: 0 5% 2%;
+  line-height: 1.1;
+}
+
+.section3 p {
+  font-size: 20px;
+  margin: -10px;
+  padding: 0 5%;
+  line-height: 1.1;
+}
+.section3 button {
+  margin-top: 20px;
+  padding: 10px 24px;
+  background-color: #f5c84c; /* 黄色 */
+  border: none;
+  border-radius: 25px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.section3 button:hover {
+  background-color: #eab937;
+}
+.section3 img {
+  max-width: 90%;
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+}
+.section3 .row:last-child {
+  align-items: center;
+  margin: 0 -25% 0 5%;
+}
+@media (max-width: 768px){
+  .section3 h3 {
+  font-size: 35px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: right;
+  font-family: Phetsarath;
+}
+
+.section3 h2 {
+  font-size: 45px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--thirdly);
+  margin-bottom: 20px;
+  font-family: Phetsarath;
+}
+.section3 h6 {
+  font-size: 15px;
+  font-weight: bold;
+  margin: -10px;
+  padding: 0 5% 10%;
+  line-height: 1.1;
+}
+
+.section3 p {
+  font-size: 15px;
+  margin: -10px;
+  padding: 0 5%;
+  line-height: 1.1;
+}
+.section3 button {
+  margin-top: 20px;
+  padding: 10px 24px;
+  background-color: #f5c84c; /* 黄色 */
+  border: none;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.section3 button:hover {
+  background-color: #eab937;
+}
+.section3 img {
+  max-width: 90%;
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+}
+}
+/*section4*/
+.section4 {
+  background-color: var(--thirdly);
+  padding: 80px 0 50px 0;
+}
+
+/* 标题区 */
+.specials {
+  background-color: var(--thirdly);
+  text-align: center;
+}
+
+.specials h2 {
+  color: #f5d76e;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.specials .subtitle {
+  color: #f5d76e;
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.frame {
+  background-image: url("pic/yellowdeco.png");
+  background-size: 100% 100%; /* 关键：贴合装饰框 */
+  background-repeat: no-repeat;
+  background-position: center;
+
+  max-width: 1100em;
+  margin: 0 auto;
+  padding: 80px 60px;
+
+  overflow: hidden; /* 防止 hover 放大破框 */
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.card {
+  background-color: #a7c98c;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  width: 30%;
+  padding: 16px 3px;
+
+  border-radius: 150px 150px 20px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  transition: transform 0.3s ease; /* hover 动画 */
+}
+
+/* Hover 微放大（不破黄色） */
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* 卡片图片 */
+.card img {
+  width: 80px;
+  margin-bottom: 20px;
+}
+
+/* 卡片标题 */
+.card h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+/* 卡片文字 */
+.card p {
+  font-size: 20px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+/* 按钮 */
+.card button {
+  background-color: #f5d76e;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card button:hover {
+  background-color: #eacb5c;
+}
+@media (max-width: 768px){
+  .card h3 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+/* 卡片文字 */
+.card p {
+  font-size: 8px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+/* 按钮 */
+.card button {
+  background-color: #f5d76e;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+}
+/*section5*/
+.section5 {
+  background-color: var(--secondary);
+  padding: 80px 0 50px 0;
+  text-align: center;
+}
+
+.come-visit {
+  max-width: 700px; /* 限制内容最大宽度，使其居中 */
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+/* 标题本身 */
+.come-visit h2 {
+  font-size: 40px;
+  font-weight: 600;
+  color: #242424; /* 深色文字 */
+  margin: 0 20px; /* 留出空间给横线 */
+  font-family: "Times New Roman", serif; /* 模仿截图中的衬线字体 */
+}
+
+/* 标题两侧的横线 */
+.title-wrapper::before,
+.title-wrapper::after {
+  content: "";
+  flex-grow: 1; /* 让横线占据剩余空间 */
+  height: 3px;
+  background-color: var(--primary); /* 模仿图片的橄榄绿色 */
+  max-width: 150px; /* 限制横线的最大长度 */
+}
+
+.text-content {
+  color: #242424;
+  font-size: 20px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+/* 每个段落单独处理，确保换行效果 */
+.text-content p {
+  margin: 10px 0;
+}
+
+.read-more-btn {
+  background-color: #f5d76e; /* 按钮的黄色 */
+  color: #242424; /* 按钮文字颜色 */
+  border: none;
+  padding: 15px 35px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.read-more-btn:hover {
+  background-color: #eacb5c; /* 鼠标悬停时的颜色 */
+}
+
+/*footer*/
+.footer2 {
+  background: var(--secondary);
+  padding: 2% 0; /* 增加上下留白，让页面更有呼吸感 */
+}
+
+.footer2-text {
+  width: calc(100% - 120px); 
+  margin: 0 auto;
+  padding: 1% 0;
+  text-align: left; /* Desktop 默认靠左堆叠 (图1) */
+  color: #5c7a3a;
+  font-family: Georgia, serif;
+}
+
+.footer2-brand {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.footer2-copy {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+/* --- Phone Size 样式 (手机端) --- */
+@media (max-width: 768px) {
+  .footer2-text {
+    display: flex;             /* 开启弹性布局 */
+    justify-content: space-between; /* 左右分居 (图2效果) */
+    align-items: center;       /* 垂直居中 */
+    text-align: unset;         /* 取消之前的靠左对齐 */
+    width: 90%;                /* 手机端让宽度稍微宽一点，更好看 */
+  }
+
+  .footer2-copy {
+    margin-top: 0;             /* 取消手机端的顶部间距，保持水平对齐 */
+  }
+}

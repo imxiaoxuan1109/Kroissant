@@ -1,0 +1,490 @@
+:root {
+  --primary: #678e49;
+  --secondary: #f8fae4;
+  --thirdly: #526838;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 防止 padding 把盒子撑大 */
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;    /* 禁止横向滚动条，防止页面左右晃动出现白边 */
+  background: #f7f8dd;   /* 确保整个背景底色一致 */
+}
+
+/* 🔧 消除所有默认间距和白边的核心代码 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 防止 padding 把盒子撑大 */
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;    /* 禁止横向滚动条，防止页面左右晃动出现白边 */
+  background: #f7f8dd;   /* 确保整个背景底色一致 */
+}
+/* --- 基础重置 --- */
+.topbar {
+  background: #f7f8dd;
+  width: 100%;
+}
+
+.rule {
+  background: #5c7a3a;
+  margin: 11px auto;
+  width: 90%; /* 手机端线长一点 */
+}
+.rule--thin { height: 1px; }
+.rule--thick { height: 3px; }
+
+/* --- 核心布局 --- */
+.header-inner {
+  display: flex;
+  justify-content: space-between; /* 关键：Logo左，汉堡右 */
+  align-items: center;
+  padding: 0% 5%;
+  position: relative;
+}
+
+.logo-wrap img {
+  height: 45px;
+  display: block;
+}
+
+/* --- 隐藏 Checkbox --- */
+.nav-toggle {
+  display: none;
+}
+
+/* --- 汉堡菜单图标 --- */
+.hamburger-label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.hamburger-label span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: #5c7a3a;
+  border-radius: 2px;
+}
+
+/*Offcanvas*/
+.nav-menu {
+  position: fixed;
+  top: 0;
+  right: -100%; 
+  width: 280px;
+  height: 100vh;
+  background: #f7f8dd;
+  z-index: 1001;
+  transition: 0.4s right ease;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+}
+
+.nav-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  color: #5c7a3a;
+  border-bottom: 1px solid #5c7a3a;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* 修改原本的 a 标签样式 */
+.nav-menu a {
+  text-decoration: none;
+  color: #5c7a3a;
+  padding: 15px 0;
+  font-size: 18px;
+  border-bottom: 1px rgba(92, 122, 58, 0.1) solid;
+  
+  /* 新增：为了防止抖动的布局技巧 */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  transition: color 0.3s;
+}
+
+/* 利用伪元素预占位粗体的宽度 */
+.nav-menu a::after {
+  display: block;
+  content: attr(title); /* 需要在 HTML 中配合 title 属性 */
+  font-weight: bold;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+/* 悬停效果 */
+.nav-menu a:hover {
+  font-weight: bold;
+  color: #526838;
+}
+
+/* --- 动画：选中时滑出 --- */
+.nav-toggle:checked ~ .nav-menu {
+  right: 0;
+}
+
+/* --- 遮罩层 --- */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  display: none;
+  z-index: 1000;
+}
+
+.nav-toggle:checked ~ .nav-overlay {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .hamburger-label { display: none; } 
+  .nav-menu {
+    position: static;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  
+  .nav-menu-header { display: none; }
+  
+  .nav-menu a {
+    margin-left: 20px;
+    border: none;
+  }
+
+  .rule { width: calc(100% - 120px); }
+}
+/*section1*/
+/* ===== SECTION 1: MYSTERY BOX ===== */
+
+.eventsubp1 {
+    width: 100%;
+    /* 增加高度，确保有足够空间显示花边卡片 */
+    min-height: 500px; 
+    position: relative;
+    overflow: hidden;
+    font-family: 'Libre Baskerville', serif;
+    /* 居中对齐卡片 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* 背景图层 */
+.eventsubp1 img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    /* 稍微调暗背景，让白色卡片更突出 */
+    filter: brightness(0.8);
+}
+
+/* 白色波浪花边卡片 */
+.eventsubp1-text {
+    position: relative;
+    z-index: 2;
+    background-color: #ffffff;
+    
+    /* 核心：固定宽高，确保 Phone 和 Desktop 视觉一致 */
+    width: 360px; 
+    min-height: 280px;
+    padding: 40px 30px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    /* 整体卡片的投影 */
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+}
+
+/* 制作波浪齿轮效果 */
+.eventsubp1-text::before {
+    content: "";
+    position: absolute;
+    /* 让花边稍微超出白色中心块 */
+    inset: -12px; 
+    background-color: #ffffff;
+    z-index: -1;
+    
+    /* 使用径向渐变画出连续的半圆 */
+    --circle: radial-gradient(circle 12px, #ffffff 96%, #0000);
+    background: 
+        var(--circle) repeat-x 0 0,         /* 顶边 */
+        var(--circle) repeat-x 0 100%,     /* 底边 */
+        var(--circle) repeat-y 0 0,         /* 左边 */
+        var(--circle) repeat-y 100% 0;     /* 右边 */
+    background-size: 24px 24px;             /* 控制波浪的大小 */
+}
+
+/* 标题样式 - 固定像素 */
+.eventsubp1-text h3 {
+    font-size: 24px; 
+    margin-bottom: 18px;
+    color: #111111;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+/* 正文样式 - 固定像素 */
+.eventsubp1-text p {
+    font-size: 15px; 
+    line-height: 1.6;
+    color: #5c7a3a; /* 你定义的绿色 */
+    margin: 0;
+    font-weight: 400;
+}
+
+/* ===== 响应式适配 (Phone Size) ===== */
+
+@media (max-width: 768px) {
+    .eventsubp1 {
+        min-height: 450px;
+        padding: 20px;
+    }
+
+    .eventsubp1-text {
+        /* 如果手机屏幕太窄（如 iPhone SE），自动缩小比例 */
+        width: 320px;
+        min-height: 240px;
+        padding: 30px 20px;
+        /* 使用 scale 确保所有间距比例和 Desktop 完全一样 */
+        transform: scale(0.9);
+    }
+}
+
+    .eventsubp1-text
+/*section2*/
+.section2 {
+    margin: 0;
+    padding: 0;
+}
+
+.homep2 {
+    width: 100%;
+}
+
+/* --- Section 3: Mystery Bread Box 样式 --- */
+/* --- 基础设置 --- */
+.mystery-section {
+    background-color: #f7f8dd; /* 页面主背景色 */
+    padding: 60px 20px;
+    font-family: 'Libre Baskerville', serif;
+}
+
+/* 核心布局容器 */
+.content-wrapper-box {
+    display: flex;
+    flex-direction: column; /* 图1效果：手机端默认上下堆叠 */
+    align-items: center;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- 1. 价格卡片部分 (上半部分/左侧) --- */
+.mystery-header-container {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+.mystery-title {
+    color: #678e49;
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.gift-arc-container {
+    background-color: #678e49;
+    padding: 40px 20px 20px;
+    border-radius: 200px 200px 0 0; /* 拱门形状 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gift-image {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.price-box {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.price-tag {
+    font-size: 26px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.price-note {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.price-separator {
+    width: 80%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 15px auto 0;
+}
+
+.box-description {
+    background-color: #678e49; /* 与拱门同色，连成一体 */
+    color: white;
+    padding: 0 20px 30px;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.box-description p {
+    margin: 5px 0;
+}
+
+/* --- 2. 插图与说明部分 (下半部分/右侧) --- */
+.mystery-detail-container {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.people-illustration {
+    width: 320px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.why-created {
+    color: #526838;
+}
+
+.why-created h3 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.why-created p {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* --- 3. 🌟 关键：Desktop 布局 (图2效果) --- */
+@media (min-width:768px) {
+    .content-wrapper-box {
+        flex-direction: column;        /* 强制变为横向排列 */
+        justify-content: center;    /* 左右居中 */
+        align-items: flex-start;    /* 顶部对齐 */
+        gap: 100px;                 /* 左右两个块的间距 */
+    }
+    .header-inner{
+        margin: 0;
+    }
+
+    .mystery-header-container {
+        margin: 0 auto; 
+        flex: 1;
+        max-width: 450px;
+    }
+
+    .mystery-detail-container {
+        margin: 0 auto; 
+        flex: 1;
+        flex-direction: row-reverse; /* 插图在右，文字在左 */
+        text-align: left;
+        align-items: center;
+        max-width: 600px;
+        padding-top: 100px;         /* 桌面端向下偏移，视觉更平衡 */
+    }
+
+    .people-illustration {
+        width: 350px;
+        margin-bottom: 0;
+        margin-left: 30px;          /* 插图与文字的间距 */
+    }
+
+    .why-created {
+        flex: 1;
+    }
+
+    .why-created h3 {
+        font-size: 32px;
+    }
+}
+/*footer*/
+.footer2 {
+  background: #f7f8dd;
+  padding: 2% 0; /* 增加上下留白，让页面更有呼吸感 */
+}
+
+.footer2-text {
+  width: calc(100% - 120px); 
+  margin: 0 auto;
+  padding: 1% 0;
+  text-align: left; /* Desktop 默认靠左堆叠 (图1) */
+  color: #5c7a3a;
+  font-family: Georgia, serif;
+}
+
+.footer2-brand {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.footer2-copy {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+/* --- Phone Size 样式 (手机端) --- */
+@media (max-width: 768px) {
+  .footer2-text {
+    display: flex;             /* 开启弹性布局 */
+    justify-content: space-between; /* 左右分居 (图2效果) */
+    align-items: center;       /* 垂直居中 */
+    text-align: unset;         /* 取消之前的靠左对齐 */
+    width: 90%;                /* 手机端让宽度稍微宽一点，更好看 */
+  }
+
+  .footer2-copy {
+    margin-top: 0;             /* 取消手机端的顶部间距，保持水平对齐 */
+  }
+}

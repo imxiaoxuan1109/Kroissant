@@ -1,0 +1,317 @@
+/* 🔧 消除所有默认间距和白边的核心代码 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 防止 padding 把盒子撑大 */
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden; /* 禁止横向滚动条，防止页面左右晃动出现白边 */
+  background: #f7f8dd; /* 确保整个背景底色一致 */
+}
+/* --- 基础重置 --- */
+.topbar {
+  background: #f7f8dd;
+  width: 100%;
+}
+
+.rule {
+  background: #5c7a3a;
+  margin: 11px auto;
+  width: 90%; /* 手机端线长一点 */
+}
+.rule--thin {
+  height: 1px;
+}
+.rule--thick {
+  height: 3px;
+}
+
+/* --- 核心布局 --- */
+.header-inner {
+  display: flex;
+  justify-content: space-between; /* 关键：Logo左，汉堡右 */
+  align-items: center;
+  padding: 2% 5%;
+  position: relative;
+}
+
+.logo-wrap img {
+  height: 45px;
+  display: block;
+}
+
+/* --- 隐藏 Checkbox --- */
+.nav-toggle {
+  display: none;
+}
+
+/* --- 汉堡菜单图标 --- */
+.hamburger-label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.hamburger-label span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: #5c7a3a;
+  border-radius: 2px;
+}
+
+/* offcanvas*/
+.nav-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 280px;
+  height: 100vh;
+  background: #f7f8dd;
+  z-index: 1001;
+  transition: 0.4s right ease;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.nav-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  color: #5c7a3a;
+  border-bottom: 1px solid #5c7a3a;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* 修改原本的 a 标签样式 */
+.nav-menu a {
+  text-decoration: none;
+  color: #5c7a3a;
+  padding: 15px 0;
+  font-size: 18px;
+  border-bottom: 1px rgba(92, 122, 58, 0.1) solid;
+  
+  /* 新增：为了防止抖动的布局技巧 */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  transition: color 0.3s;
+}
+
+/* 利用伪元素预占位粗体的宽度 */
+.nav-menu a::after {
+  display: block;
+  content: attr(title); /* 需要在 HTML 中配合 title 属性 */
+  font-weight: bold;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+/* 悬停效果 */
+.nav-menu a:hover {
+  font-weight: bold;
+  color: #526838;
+}
+
+/* --- 动画：选中时滑出 --- */
+.nav-toggle:checked ~ .nav-menu {
+  right: 0;
+}
+
+/* --- 遮罩层 --- */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: none;
+  z-index: 1000;
+}
+
+.nav-toggle:checked ~ .nav-overlay {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .hamburger-label {
+    display: none;
+  }
+  .nav-menu {
+    position: static;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .nav-menu-header {
+    display: none;
+  }
+
+  .nav-menu a {
+    margin-left: 20px;
+    border: none;
+  }
+
+  .rule {
+    width: calc(100% - 120px);
+  }
+}
+
+.first {
+  position: relative;
+  width: 100vw;
+  height: 100vh; /* 默认电脑全屏 */
+  overflow: hidden;
+}
+
+.first img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 图片不变形，裁切填满 */
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.firsttext {
+  position: absolute;
+  inset: 0; /* top:0; bottom:0; left:0; right:0 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 2; /* 确保文字在图片上面 */
+}
+
+.firsttext h1 {
+  color: white;
+  font-size: clamp(24px, 5vw, 72px); /* 电话电脑自适应 */
+  font-family: Libre Baskerville;
+  margin: 0;
+  padding: 0 20px;
+}
+
+/* 📱 手机尺寸调整图片高度 */
+@media (max-width: 768px) {
+  .first {
+    height: 50vh; /* 手机高度缩短，照片变小 */
+  }
+}
+
+/* --- 基础样式 --- */
+.section3 {
+  background-color: #f7f8dd;
+  padding: 10% 0 0 0; /* 建议使用具体数值或 rem */
+}
+
+/* 统一字体设置 */
+.section3 h5 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 40px; /* 根据图片微调了大小 */
+  margin-bottom: 10px;
+}
+
+.section3 p {
+  font-family: 'poly', serif;
+  font-size: 20px;
+  line-height: 1.6; /* 增加行高，提升阅读感 */
+}
+
+/* --- Desktop 专用样式 --- */
+@media (min-width: 768px) {
+  /* 限制文字宽度，避免离图片太远 */
+  .one, .two, .three {
+    max-width: 450px; 
+    display: inline-block;
+  }
+
+  /* 第一和第三个：文字向右对齐，且容器本身靠右 */
+  .one, .three {
+    text-align: right;
+  }
+  
+  /* 容器定位：CEO和Baker在左栏时，文字盒子要靠右边贴近图片 */
+  .col-md-6:has(.one), .col-md-6:has(.three) {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 40px; /* 离图片的间距 */
+  }
+
+  /* 第二个：文字向左对齐，容器靠左 */
+  .two {
+    text-align: left;
+  }
+  
+  .col-md-6:has(.two) {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 40px; /* 离图片的间距 */
+  }
+}
+
+/* --- Mobile 样式 --- */
+@media (max-width: 767px) {
+  .section3 h5 { font-size: 28px; }
+  .section3 p { font-size: 18px; }
+  .one, .two, .three {
+    text-align: center;
+    padding: 0 15px;
+  }
+}
+/* =========================
+   FOOTER
+   ========================= */
+/* --- Footer 基础样式 (Desktop 默认) --- */
+.footer2 {
+  background: #f7f8dd;
+  padding: 2% 0; /* 增加上下留白，让页面更有呼吸感 */
+}
+
+.footer2-text {
+  width: calc(100% - 120px);
+  margin: 0 auto;
+  padding: 1% 0;
+  text-align: left; /* Desktop 默认靠左堆叠 (图1) */
+  color: #5c7a3a;
+  font-family: Georgia, serif;
+}
+
+.footer2-brand {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.footer2-copy {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+/* --- Phone Size 样式 (手机端) --- */
+@media (max-width: 768px) {
+  .footer2-text {
+    display: flex; /* 开启弹性布局 */
+    justify-content: space-between; /* 左右分居 (图2效果) */
+    align-items: center; /* 垂直居中 */
+    text-align: unset; /* 取消之前的靠左对齐 */
+    width: 90%; /* 手机端让宽度稍微宽一点，更好看 */
+  }
+
+  .footer2-copy {
+    margin-top: 0; /* 取消手机端的顶部间距，保持水平对齐 */
+  }
+}

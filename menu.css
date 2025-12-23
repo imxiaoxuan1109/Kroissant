@@ -1,0 +1,679 @@
+/* 🔧 消除所有默认间距和白边的核心代码 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 防止 padding 把盒子撑大 */
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;    /* 禁止横向滚动条，防止页面左右晃动出现白边 */
+  background: #f7f8dd;   /* 确保整个背景底色一致 */
+}
+
+/* 🔧 消除所有默认间距和白边的核心代码 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 防止 padding 把盒子撑大 */
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;    /* 禁止横向滚动条，防止页面左右晃动出现白边 */
+  background: #f7f8dd;   /* 确保整个背景底色一致 */
+}
+/* --- 基础重置 --- */
+.topbar {
+  background: #f7f8dd;
+  width: 100%;
+}
+
+.rule {
+  background: #5c7a3a;
+  margin: 11px auto;
+  width: 90%; /* 手机端线长一点 */
+}
+.rule--thin { height: 1px; }
+.rule--thick { height: 3px; }
+
+/* --- 核心布局 --- */
+.header-inner {
+  display: flex;
+  justify-content: space-between; /* 关键：Logo左，汉堡右 */
+  align-items: center;
+  padding: 2% 5%;
+  position: relative;
+}
+
+.logo-wrap img {
+  height: 45px;
+  display: block;
+}
+
+/* --- 隐藏 Checkbox --- */
+.nav-toggle {
+  display: none;
+}
+
+/* --- 汉堡菜单图标 --- */
+.hamburger-label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.hamburger-label span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: #5c7a3a;
+  border-radius: 2px;
+}
+
+/*Offcanvas*/
+.nav-menu {
+  position: fixed;
+  top: 0;
+  right: -100%; 
+  width: 280px;
+  height: 100vh;
+  background: #f7f8dd;
+  z-index: 1001;
+  transition: 0.4s right ease;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+}
+
+.nav-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  color: #5c7a3a;
+  border-bottom: 1px solid #5c7a3a;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* 修改原本的 a 标签样式 */
+.nav-menu a {
+  text-decoration: none;
+  color: #5c7a3a;
+  padding: 15px 0;
+  font-size: 18px;
+  border-bottom: 1px rgba(92, 122, 58, 0.1) solid;
+  
+  /* 新增：为了防止抖动的布局技巧 */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  transition: color 0.3s;
+}
+
+/* 利用伪元素预占位粗体的宽度 */
+.nav-menu a::after {
+  display: block;
+  content: attr(title); /* 需要在 HTML 中配合 title 属性 */
+  font-weight: bold;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+/* 悬停效果 */
+.nav-menu a:hover {
+  font-weight: bold;
+  color: #526838;
+}
+
+/* --- 动画：选中时滑出 --- */
+.nav-toggle:checked ~ .nav-menu {
+  right: 0;
+}
+
+/* --- 遮罩层 --- */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  display: none;
+  z-index: 1000;
+}
+
+.nav-toggle:checked ~ .nav-overlay {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .hamburger-label { display: none; } 
+  .nav-menu {
+    position: static;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  
+  .nav-menu-header { display: none; }
+  
+  .nav-menu a {
+    margin-left: 20px;
+    border: none;
+  }
+
+  .rule { width: calc(100% - 120px); }
+}
+
+.mbti-wrap{
+  background: #f7f8dd;          /* 外面淡黄 */
+  padding: 40px 0 60px;
+}
+
+.mbti-box{
+  width: min(980px, 92vw);
+  margin: 0 auto;
+  background: #6b8f4b;          /* 绿色大框 */
+  padding: 28px 36px 34px;
+}
+
+.mbti-line{
+  height: 6px;                  /* 黄线厚度 */
+  background: #e7cc67;          /* 黄线颜色 */
+  margin: 0 0 18px;
+}
+
+.mbti-line-bottom{
+  margin: 14px 0 26px;          /* 第二条线和下面卡片的距离 */
+}
+
+.mbti-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+}
+
+.mbti-title{
+  color: #f4f2e3;
+  font-family: Georgia, serif;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+}
+
+.mbti-more{
+  color: #f4f2e3;
+  font-family: Georgia, serif;
+  font-size: 18px;
+  text-decoration: underline;   /* 右边 View more 下划线 */
+}
+
+.mbti-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: auto;
+  align-items: start;
+  padding: 0 6px;
+}
+
+.mbti-item{
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+}
+
+.mbti-img{
+  background: #e7cc67;          /* 每张图后面的黄底 */
+  width: 150px;
+  height: 200px;
+  margin: 0 auto 10%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.mbti-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+
+  /* 动效 */
+  transform: scale(1);
+  transition: transform 220ms ease, filter 220ms ease;
+}
+
+.mbti-type{
+  color: #f4f2e3;
+  font-family: Georgia, serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.mbti-price{
+  color: #f4f2e3;
+  font-family: Georgia, serif;
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+/* ✅ Hover 动效（你要“照片有动效”就是这个） */
+.mbti-item:hover .mbti-img img{
+  transform: scale(1.06);
+  filter: brightness(1.05) contrast(1.03);
+}
+
+.mbti-item:active .mbti-img img{
+  transform: scale(1.02);
+}
+
+
+/* =========================
+   MBTI SPECIAL SET
+   ========================= */
+
+.mbti-section{
+  background: #f7f8dd;
+  padding: 80px 0;
+}
+
+.mbti-box{
+  width: min(1200px, 92vw);
+  margin: 0 auto;
+  background: #6f8f4b;        /* 绿色背景 */
+  padding: 40px 50px;
+}
+
+/* 标题行 */
+.mbti-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mbti-header h2{
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.mbti-more{
+  color: #e9f1ff;
+  text-decoration: underline;
+  font-size: 16px;
+}
+
+/* 黄色线 */
+.mbti-line{
+  height: 4px;
+  background: #f3c84b;
+  margin: 16px 0 40px;
+}
+
+/* 产品排列 */
+.mbti-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+/* 单个卡片 */
+.mbti-item{
+  text-align: center;
+}
+
+.mbti-item img{
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  display: block;
+  margin: 0 auto 18px;
+}
+
+/* MBTI 字 */
+.mbti-item h3{
+  color: #fff;
+  font-size: 20px;
+  margin: 0 0 6px;
+  letter-spacing: 1px;
+}
+
+/* 价格 */
+.mbti-item p{
+  color: #fff;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* 手机版 */
+@media (max-width: 768px){
+  .mbti-grid{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+.checker-strip{
+  background: #f7f8dd;   /* 跟页面一样的淡黄 */
+  padding: 24px 0 40px;  /* 上下留白 */
+}
+
+.checker-strip img{
+  display: block;
+  margin: 0 auto;        /* 水平居中 */
+  max-width: 100%;       /* 不会爆屏 */
+  height: auto;
+}
+
+
+
+/* ===== KOPI SECTION (match your design) ===== */
+.kopi-section{
+  background: #f7f8dd;            /* 你的淡黄底 */
+  padding: 60px 0 80px;
+}
+
+.kopi-title{
+  width: fit-content;
+  margin: 0 auto 18px;
+  padding: 10px 38px;
+  background: #5c7a3a;            /* 青绿色 */
+  color: #fff;
+  font-family: Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-radius: 0;               /* 图里是直角 */
+}
+
+.kopi-rule{
+  width: calc(100% - 120px);
+  height: 2px;
+  background: #5c7a3a;
+  margin: 0 auto 55px;
+}
+
+/* 3列 2行 */
+.kopi-grid{
+  width: min(980px, 92vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: auto;                /* 行间距 / 列间距 */
+  justify-items: center;
+}
+
+.kopi-card{
+  text-align: center;
+  font-family: Georgia, serif;
+}
+
+/* 图 + 青色条(hover变大块) */
+.kopi-figure{
+  position: relative;
+  width: 240px;                   /* 控制每个卡片视觉宽度 */
+  height: 170px;                  /* 让青色条/块有空间 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 默认：横条 */
+.kopi-figure::before{
+  content:"";
+  position: absolute;
+  width: 140px;                   /* 横条长度 */
+  height: 22px;                   /* 横条厚度 */
+  background: #5c7a3a;
+  top: 55px;                      /* 横条位置（对齐杯子中部） */
+  border-radius: 0;
+  transition: all .22s ease;
+  z-index: 0;
+}
+
+/* 杯子图片 */
+.kopi-figure img{
+  width: 120px;                   /* 杯子大小 */
+  height: auto;
+  position: relative;
+  z-index: 1;
+  transition: transform .22s ease;
+}
+
+/* ✅ hover：变成图3那种大青色块 */
+.kopi-card:hover .kopi-figure::before{
+  width: 200px;
+  height: 130px;
+  top: 20px;
+}
+
+.kopi-card:hover .kopi-figure img{
+  transform: scale(1.05);
+}
+
+/* 字体 */
+.kopi-name{
+  margin-top: 14px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+}
+
+.kopi-price{
+  margin-top: 6px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* --- 响应式布局：手机端 --- */
+@media (max-width: 768px) {
+  /* 让 Kopi 网格变为 2 列 */
+  .kopi-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 10px; /* 缩小手机端的间距，防止内容太挤 */
+  }
+
+  /* 调整手机端图片背景块的大小，防止溢出屏幕 */
+  .kopi-figure {
+    width: 160px; /* 缩小容器宽度 */
+    height: 140px;
+  }
+
+  .kopi-figure::before {
+    width: 100px; /* 缩小绿色横条宽度 */
+  }
+
+  .kopi-figure img {
+    width: 90px;  /* 缩小杯子图片 */
+  }
+
+  /* 调整手机端 Hover 后的绿色块大小 */
+  .kopi-card:hover .kopi-figure::before {
+    width: 140px;
+    height: 100px;
+    top: 20px;
+  }
+}
+
+/* ===== BREAD SECTION (same style as your screenshot) ===== */
+.bread-section{
+  background: #f7f8dd;
+  padding: 60px 0 80px;
+}
+
+.bread-title{
+  width: fit-content;
+  margin: 0 auto 18px;
+  padding: 10px 42px;
+  background: #5c7a3a;
+  color: #fff;
+  font-family: Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.bread-rule{
+  width: calc(100% - 120px);
+  height: 2px;
+  background: #5c7a3a;
+  margin: 0 auto 55px;
+}
+
+/* 3 columns x 3 rows */
+.bread-grid{
+  width: min(980px, 92vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: auto;
+  justify-items: center;
+}
+
+.bread-card{
+  text-align: center;
+  font-family: Georgia, serif;
+}
+
+/* figure area = space for green bar + hover block */
+.bread-figure{
+  position: relative;
+  width: 240px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* default: green horizontal bar */
+.bread-figure::before{
+  content:"";
+  position: absolute;
+  width: 140px;
+  height: 18px;
+  background: #5c7a3a;
+  top: 58px;
+  transition: all .22s ease;
+  z-index: 0;
+}
+
+/* bread image */
+.bread-figure img{
+  width: 90px;         /* bread icon size */
+  height: auto;
+  position: relative;
+  z-index: 1;
+  transition: transform .22s ease;
+}
+
+/* ✅ hover: become big green block (like your 图3) */
+.bread-card:hover .bread-figure::before{
+  width: 190px;
+  height: 110px;
+  top: 18px;
+}
+
+.bread-card:hover .bread-figure img{
+  transform: scale(1.08);
+}
+
+/* text under image */
+.bread-name{
+  margin-top: 14px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.15;
+}
+
+.bread-price{
+  margin-top: 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* --- 响应式布局：手机端 --- */
+@media (max-width: 768px) {
+  /* 让 Kopi 网格变为 2 列 */
+  .bread-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 10px; /* 缩小手机端的间距，防止内容太挤 */
+  }
+
+  /* 调整手机端图片背景块的大小，防止溢出屏幕 */
+  .bread-figure {
+    width: 160px; /* 缩小容器宽度 */
+    height: 140px;
+  }
+
+  .bread-figure::before {
+    width: 100px; /* 缩小绿色横条宽度 */
+  }
+
+  .bread-figure img {
+    width: 90px;  /* 缩小杯子图片 */
+  }
+
+  /* 调整手机端 Hover 后的绿色块大小 */
+  .bread-card:hover .bread-figure::before {
+    width: 140px;
+    height: 100px;
+    top: 20px;
+  }
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+/* --- Footer 基础样式 (Desktop 默认) --- */
+.footer2 {
+  background: #f7f8dd;
+  padding: 2% 0; /* 增加上下留白，让页面更有呼吸感 */
+}
+
+.footer2-text {
+  width: calc(100% - 120px); 
+  margin: 0 auto;
+  padding: 1% 0;
+  text-align: left; /* Desktop 默认靠左堆叠 (图1) */
+  color: #5c7a3a;
+  font-family: Georgia, serif;
+}
+
+.footer2-brand {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.footer2-copy {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+/* --- Phone Size 样式 (手机端) --- */
+@media (max-width: 768px) {
+  .footer2-text {
+    display: flex;             /* 开启弹性布局 */
+    justify-content: space-between; /* 左右分居 (图2效果) */
+    align-items: center;       /* 垂直居中 */
+    text-align: unset;         /* 取消之前的靠左对齐 */
+    width: 90%;                /* 手机端让宽度稍微宽一点，更好看 */
+  }
+
+  .footer2-copy {
+    margin-top: 0;             /* 取消手机端的顶部间距，保持水平对齐 */
+  }
+}
